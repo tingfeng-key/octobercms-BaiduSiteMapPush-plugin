@@ -1,0 +1,18 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+fields:
+    baidu_sitemap_push_url:
+        label: "tingfeng.baidusitemappush::lang.baidu_sitemap_push_url_label"
+        comment: "tingfeng.baidusitemappush::lang.baidu_sitemap_push_url_comment"
+        type: text
+    enable_baidu_sitemap_push_for_blog_post:
+        label: "tingfeng.baidusitemappush::lang.enable_baidu_sitemap_push_for_blog_post_label"
+        comment: "tingfeng.baidusitemappush::lang.enable_baidu_sitemap_push_for_blog_post_comment"
+        type: switch
+        span: left
+    enable_baidu_sitemap_push_for_news_post:
+        label: "tingfeng.baidusitemappush::lang.enable_baidu_sitemap_push_for_news_post_post_label"
+        comment: "tingfeng.baidusitemappush::lang.enable_baidu_sitemap_push_for_news_post_post_comment"
+        type: switch
+        span: right

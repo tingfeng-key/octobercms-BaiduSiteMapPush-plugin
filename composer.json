@@ -1,0 +1,14 @@
+{
+    "name": "tingfeng-key/october-baidu-sitemap-push-plugin",
+    "description": "baidu sitemap push",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tingfeng-key",
+            "email": "1770963469@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}
