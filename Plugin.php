@@ -136,13 +136,21 @@ class Plugin extends PluginBase
                             return;
                         }
 
-                        $category = $model->find($attributes[$model->getKeyName()]);
-
                         $paramName = substr(trim($matches[1]), 1);
 
-                        $params = [
-                            $paramName => $category->slug
-                        ];
+                        if (isset($attributes[$model->getKeyName()])) {
+                            $category = $model->find($attributes[$model->getKeyName()]);
+
+                            $params = [
+                                $paramName => $category->slug,
+                            ];
+
+                            $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
+                        }else {
+                            $params = [
+                                $paramName => $attributes['News']['slug'],
+                            ];
+                        }
 
                         $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
                     }
