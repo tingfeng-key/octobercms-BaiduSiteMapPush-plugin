@@ -87,10 +87,10 @@ class Plugin extends PluginBase
                             $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
                         }else {
                             $params = [
-                                $paramName => $attributes['Post']['slug'],
+                                $paramName => $attributes['slug'],
                             ];
-                            if (!empty($attributes['Post']['published_at'])) {
-                                $publishedAt = Carbon::parse($attributes['Post']['published_at']);
+                            if (!empty($attributes['published_at'])) {
+                                $publishedAt = Carbon::parse($attributes['published_at']);
                                 $params['year'] = $publishedAt->format("Y");
                                 $params['month'] = $publishedAt->format("m");
                                 $params['day'] = $publishedAt->format("d");
@@ -148,7 +148,7 @@ class Plugin extends PluginBase
                             $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
                         }else {
                             $params = [
-                                $paramName => $attributes['News']['slug'],
+                                $paramName => $attributes['slug'],
                             ];
                         }
 
