@@ -3,6 +3,7 @@
 use Cms\Classes\Page as CmsPage;
 use Cms\Classes\Theme;
 use GuzzleHttp\Client;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
@@ -71,19 +72,32 @@ class Plugin extends PluginBase
                         if (!preg_match('/^\{\{([^\}]+)\}\}$/', $properties['slug'], $matches)) {
                             return;
                         }
-
-                        $category = $model->find($attributes[$model->getKeyName()]);
-
                         $paramName = substr(trim($matches[1]), 1);
 
-                        $params = [
-                            $paramName => $category->slug,
-                            'year'  => $category->published_at->format('Y'),
-                            'month' => $category->published_at->format('m'),
-                            'day'   => $category->published_at->format('d')
-                        ];
+                        if (isset($attributes[$model->getKeyName()])) {
+                            $category = $model->find($attributes[$model->getKeyName()]);
 
-                        $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
+                            $params = [
+                                $paramName => $category->slug,
+                                'year'  => $category->published_at->format('Y'),
+                                'month' => $category->published_at->format('m'),
+                                'day'   => $category->published_at->format('d')
+                            ];
+
+                            $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
+                        }else {
+                            $params = [
+                                $paramName => $attributes['Post']['slug'],
+                            ];
+                            if (!empty($attributes['Post']['published_at'])) {
+                                $publishedAt = Carbon::parse($attributes['Post']['published_at']);
+                                $params['year'] = $publishedAt->format("Y");
+                                $params['month'] = $publishedAt->format("m");
+                                $params['day'] = $publishedAt->format("d");
+                            }
+
+                            $pushUrls[] = CmsPage::url($page->getBaseFileName(), $params);
+                        }
                     }
 
                     if (count($pushUrls) > 0) {
